@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import ArticleTile from './ArticleTile';
+import Loading from "./Loading"
 
 class ArticlesList extends Component {
   state = { articles: [], isLoading: true };
@@ -19,8 +20,12 @@ class ArticlesList extends Component {
   }
 
   render() {
+    const {isLoading}  = this.state
     return (
+     
       <div>
+     
+        {isLoading ? <Loading /> : null}
         ~~~~~ARTICLES LIST~~~~~
         <form>
           <label>

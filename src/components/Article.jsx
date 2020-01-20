@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import * as api from '../utils/api';
-import CommentsList from './CommentsList';
+import React, { Component } from "react";
+import * as api from "../utils/api";
+import CommentsList from "./CommentsList";
 
 class Article extends Component {
-  state = { article: '', showComments: false };
+  state = { article: "", showComments: false };
 
   componentDidMount() {
     api.getSingleArticle(this.props.article_id).then(article => {
@@ -17,7 +17,7 @@ class Article extends Component {
 
   render() {
     const { article } = this.state;
-    const showComment = this.state.showComments;
+    const { showComments } = this.state;
     return (
       <div>
         {article.title}
@@ -27,7 +27,7 @@ class Article extends Component {
         <p>
           <button onClick={this.handleCommentClick}>Show {article.comment_count} Comments</button>
         </p>
-        {showComment ? <CommentsList article_id={article.article_id} /> : null}
+        {showComments ? <CommentsList article_id={article.article_id} /> : null}
       </div>
     );
   }

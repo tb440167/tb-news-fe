@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
+import CommentTile from './CommentTile';
 
 class CommentsList extends Component {
   state = { comments: [] };
@@ -15,7 +16,7 @@ class CommentsList extends Component {
     return (
       <div>
         {comments.map(comment => {
-          return comment.author;
+          return <CommentTile comment={comment} key={comment.comment_id}/>
         })}
       </div>
     );
