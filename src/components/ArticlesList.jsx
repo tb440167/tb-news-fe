@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import ArticleTile from './ArticleTile';
-import Loading from "./Loading"
+import Loading from './Loading';
 
 class ArticlesList extends Component {
-  state = { articles: [], isLoading: true };
+  state = { articles: [], isLoading: true, sort_by: null, asc: null };
 
   componentDidMount() {
-    api.getArticles().then(articles => {
-      this.setState({ articles: articles, isLoading: false });
+    api.getArticles(this.props.topic).then(articles => {
+      this.setState({ articles: articles, isLoading: false, asc: false });
     });
   }
 
@@ -19,25 +19,40 @@ class ArticlesList extends Component {
       });
   }
 
+  handleClick = event => {
+    const order = this.state.asc ? 'asc' : 'desc';
+    console.log(order);
+
+    event.preventDefault();
+    this.setState({ sort_by: event.target.value, asc: !this.state.asc });
+    api.getArticles(this.props.topic, this.state.sort_by, order).then(articles => {
+      this.setState({ articles: articles, isLoading: false });
+    });
+  };
+
   render() {
-    const {isLoading}  = this.state
+    const { isLoading, asc } = this.state;
     return (
-     
       <div>
-     
         {isLoading ? <Loading /> : null}
         ~~~~~ARTICLES LIST~~~~~
         <form>
           <label>
-            <button>Newest</button>
+            <button value="created_at" onClick={this.handleClick}>
+              {asc ? 'Oldest' : 'Newest'}
+            </button>
           </label>
           <label>
             {' '}
-            <button>Most Active (comments)</button>
+            <button value="comment_count" onClick={this.handleClick}>
+              {asc ? 'Least Active' : 'Most Active'}
+            </button>
           </label>
           <label>
             {' '}
-            <button>Most Popular (votes)</button>
+            <button value="votes" onClick={this.handleClick}>
+              {asc ? 'Most Popular' : 'Least Popular'}
+            </button>
           </label>
         </form>
         {this.state.articles.map(article => {

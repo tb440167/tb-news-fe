@@ -8,7 +8,7 @@ import Article from './components/Article';
 
 class App extends Component {
   state = {
-    username: 'derpderpderp'
+    username: 'jessjelly'
   };
 
   render() {
@@ -19,7 +19,7 @@ class App extends Component {
         <Router>
           <ArticlesList path="/" />
           <ArticlesList path="/topics/:topic" />
-          <Article path="/articles/:article_id" />
+          <Article path="/articles/:article_id" username={this.state.username} />
         </Router>
       </div>
     );
