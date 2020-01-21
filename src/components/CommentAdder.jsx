@@ -6,8 +6,9 @@ class CommentAdder extends Component {
   };
 
   changeHandler = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value })
   };
+
 
   render() {
     return (
