@@ -11,10 +11,6 @@ class Article extends Component {
     });
   }
 
-  handleCommentClick = () => {
-    this.setState({ showComments: !this.state.showComments });
-  };
-
   handleCommentSubmit = event => {
     event.preventDefault();
     const { article_id, username } = this.props;
@@ -38,16 +34,8 @@ class Article extends Component {
         <p>{article.body}</p>
         <p>Author: {article.author}</p>
         <p>Posted at: {article.created_at}</p>
-        <form onSubmit={this.handleCommentSubmit}>
-          <label>
-            <textarea id="comment_body" name="comment" onChange={this.handleOnChange} value={this.state.value}></textarea>
-            <button>Add Comment!</button>
-          </label>
-        </form>
-        <p>
-          <button onClick={this.handleCommentClick}>Show {article.comment_count} Comments</button>
-        </p>
-        {showComments ? <CommentsList article_id={article.article_id} /> : null}
+
+        <CommentsList article_id={this.props.article_id} username={this.props.username} showComments={showComments} />
       </div>
     );
   }

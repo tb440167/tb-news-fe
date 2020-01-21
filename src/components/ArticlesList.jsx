@@ -24,9 +24,10 @@ class ArticlesList extends Component {
     console.log(order);
 
     event.preventDefault();
-    this.setState({ sort_by: event.target.value, asc: !this.state.asc });
-    api.getArticles(this.props.topic, this.state.sort_by, order).then(articles => {
-      this.setState({ articles: articles, isLoading: false });
+    this.setState({ sort_by: event.target.value, asc: !this.state.asc }, () => {
+      api.getArticles(this.props.topic, this.state.sort_by, order).then(articles => {
+        this.setState({ articles: articles, isLoading: false });
+      });
     });
   };
 

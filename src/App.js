@@ -18,7 +18,7 @@ class App extends Component {
         <NavBar />
         <Router>
           <ArticlesList path="/" />
-          <ArticlesList path="/topics/:topic" />
+          <ArticlesList path="/topics/:topic" username={this.state.username} />
           <Article path="/articles/:article_id" username={this.state.username} />
         </Router>
       </div>
