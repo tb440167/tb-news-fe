@@ -39,11 +39,12 @@ class CommentsList extends Component {
 
   render() {
     const { comments, err } = this.state;
+    const checker = this.state.comments.length
     if (this.state.isLoading) return <Loader />;
     if (err) return <ErrHandler err={err} />;
     return (
       <div>
-        <CommentAdder addCommentHandler={this.addCommentHandler} />
+        <CommentAdder addCommentHandler={this.addCommentHandler} checker={checker}/>
         {comments.map(comment => {
           return <CommentTile comment={comment} key={comment.comment_id} username={this.props.username} handleDeleteClick={this.handleDeleteClick} />;
         })}

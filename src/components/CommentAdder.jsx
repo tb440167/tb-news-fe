@@ -9,6 +9,10 @@ class CommentAdder extends Component {
     this.setState({ value: event.target.value });
   };
 
+  componentDidUpdate(prevProps, prevState){
+        if(prevProps.checker !== this.props.checker) this.setState({value: ""})
+  }
+
   render() {
     let onOff = true;
     if (this.state.value.length > 2) onOff = false;
