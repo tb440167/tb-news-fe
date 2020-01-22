@@ -34,7 +34,6 @@ body {
 .articles {
   padding: 0;
   margin: 0;
-  border: dashed;
   grid-area: 3 / 2 / 4 / 3;
   height: 90vh;
   overflow-y: scroll;
@@ -42,13 +41,17 @@ body {
 
 .article-grid-container {
   display: grid;
-  grid-template-columns: 0.2fr 1.8fr 0.2fr;
+  margin-top: 5%;  
+  grid-template-columns: 0.2fr 1.8fr 0.4fr;
   grid-template-rows: 0.3fr 2.4fr 0.3fr;
+  grid-column-gap: 4px;
+ grid-row-gap: 4px;
   grid-template-areas:
     'voter title topic'
     'voter body body'
     'voter author time';
 }
+
 
 /* .article-title {
   display: grid;
@@ -76,6 +79,11 @@ body {
 
 .topic {
   grid-area: topic;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  font-weight: bold;
+  font-size: small;
 }
 
 .voter {
@@ -91,8 +99,18 @@ body {
 
 .author {
   grid-area: author;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .time {
   grid-area: time;
+  font-size: smaller;
+  font-weight: 400;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: row-reverse;
 }
