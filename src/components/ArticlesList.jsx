@@ -4,6 +4,8 @@ import ArticleTile from './ArticleTile';
 import '../App.css';
 import Loader from './Loader';
 import ErrHandler from './ErrHandler';
+import down_sort from "../img/down_sort.png"
+import up_sort from "../img/up_sort.png"
 
 class ArticlesList extends Component {
   state = { articles: [], isLoading: true, err: '', sort_by: null, asc: null };
@@ -28,15 +30,11 @@ class ArticlesList extends Component {
       });
   }
 
-  handleClick = event => {
-    const order = this.state.asc ? 'asc' : 'desc';
-
-    event.preventDefault();
-    this.setState({ sort_by: event.target.value, asc: !this.state.asc }, () => {
-      api.getArticles(this.props.topic, this.state.sort_by, order).then(articles => {
+  handleClick = (sort, order) => {   
+      api.getArticles(this.props.topic, sort, order).then(articles => {
         this.setState({ articles: articles, isLoading: false });
       });
-    });
+
   };
 
   render() {
@@ -45,25 +43,11 @@ class ArticlesList extends Component {
     if (err) return <ErrHandler err={err} />;
     return (
       <section>
-        <form>
-          <label>
-            <button value="created_at" onClick={this.handleClick}>
-              {asc ? 'Oldest' : 'Newest'}
-            </button>
-          </label>
-          <label>
-            {' '}
-            <button value="comment_count" onClick={this.handleClick}>
-              {asc ? 'Least Active' : 'Most Active'}
-            </button>
-          </label>
-          <label>
-            {' '}
-            <button value="votes" onClick={this.handleClick}>
-              {asc ? 'Most Popular' : 'Least Popular'}
-            </button>
-          </label>
-        </form>
+        <div className="sortNav">
+        <div className="sortNav">Date: <img src={down_sort} alt="sort" onClick={() => this.handleClick("created_at", "desc")}/><img src={up_sort} alt="sort" onClick={() => this.handleClick("created_at", "asc")} /></div>
+        <div className="sortNav">Comments: <img src={down_sort} alt="sort" onClick={() => this.handleClick("comment_count", "desc")}/><img src={up_sort} alt="sort" onClick={() => this.handleClick("comment_count", "asc")}/></div>
+        <div className="sortNav">Votes: <img src={down_sort} alt="sort" onClick={() => this.handleClick("votes", "desc")}/><img src={up_sort} alt="sort" onClick={() => this.handleClick("votes", "desc")}/></div>
+        </div>
         {this.state.articles.map(article => {
           return <ArticleTile article={article} key={article.article_id} />;
         })}
@@ -73,3 +57,5 @@ class ArticlesList extends Component {
 }
 
 export default ArticlesList;
+
+

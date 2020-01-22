@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 
+
 class Voter extends Component {
   state = { optiVote: 0, err: '' };
 

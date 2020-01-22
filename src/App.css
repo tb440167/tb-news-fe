@@ -20,6 +20,12 @@ body {
 .UserLogin {
   font-size: 10px;
 }
+
+.sortNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 .Nav {
   display: flex;
   flex-direction: row;
