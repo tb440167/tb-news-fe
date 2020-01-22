@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from '@reach/router';
+import Voter from './Voter';
 
-const ArticleTile = ({ article }) => {
-  return (
-    <Link to={`/articles/${article.article_id}`}>
+class ArticleTile extends Component {
+  render() {
+    const { article } = this.props;
+    return (
       <div>
-        {article.title}-[
-        {article.topic}]
+        <Link to={`/articles/${article.article_id}`}>{article.title}</Link>-[
+        {article.topic}]{article.votes}
+        <Voter id={article.article_id} type="articles" votes={article.votes} />
       </div>
-    </Link>
-  );
-};
+    );
+  }
+}
 
 export default ArticleTile;

@@ -32,10 +32,10 @@ exports.postNewComment = (article_id, username, body) => {
   });
 };
 
-exports.patchCommentVotes = (comment_id, newVote) => {
-  return axios.patch(`${base_url}/comments/${comment_id}`, {inc_votes: newVote}).then(({data}) => {
-    console.log(data);
-    
-    return data
-  })
-}
+exports.patchCommentVotes = (id, newVote, type) => {
+  return axios.patch(`${base_url}/${type}/${id}`, { inc_votes: newVote }).then(({ data }) => {
+    console.log('patching......');
+
+    return data;
+  });
+};
