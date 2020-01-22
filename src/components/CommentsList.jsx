@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import * as api from '../utils/api';
 import CommentTile from './CommentTile';
 import CommentAdder from './CommentAdder';
+import Loader from './Loader';
+import ErrHandler from './ErrHandler';
 
 class CommentsList extends Component {
-  state = { comments: [] };
+  state = { comments: [], err: '', isLoading: true };
 
   componentDidMount() {
-    api.getCommentsByArticle(this.props.article_id).then(comments => {
-      this.setState({ comments });
-    });
+    api
+      .getCommentsByArticle(this.props.article_id)
+      .then(comments => {
+        this.setState({ comments, isLoading: false });
+      })
+      .catch(({ response: { data } }) => {
+        this.setState({ err: data.message, isLoading: false });
+      });
   }
 
   addCommentHandler = event => {
@@ -22,14 +29,23 @@ class CommentsList extends Component {
     });
   };
 
-  render() {
-    const { comments } = this.state;
+  handleDeleteClick = id => {
+    api.deleteComment(id).then(() => {
+      api.getCommentsByArticle(this.props.article_id).then(comments => {
+        this.setState({ comments });
+      });
+    });
+  };
 
+  render() {
+    const { comments, err } = this.state;
+    if (this.state.isLoading) return <Loader />;
+    if (err) return <ErrHandler err={err} />;
     return (
       <div>
         <CommentAdder addCommentHandler={this.addCommentHandler} />
         {comments.map(comment => {
-          return <CommentTile comment={comment} key={comment.comment_id} username={this.props.username} />;
+          return <CommentTile comment={comment} key={comment.comment_id} username={this.props.username} handleDeleteClick={this.handleDeleteClick} />;
         })}
       </div>
     );

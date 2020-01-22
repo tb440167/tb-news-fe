@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loading = () => {
+const Loader = () => {
   return (
     <div>
       <img src="https://i.gifer.com/4V0b.gif" alt="Loading"></img>
@@ -8,4 +8,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default Loader;

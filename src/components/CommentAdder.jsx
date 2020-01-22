@@ -6,18 +6,19 @@ class CommentAdder extends Component {
   };
 
   changeHandler = event => {
-    this.setState({ value: event.target.value })
+    this.setState({ value: event.target.value });
   };
 
-
   render() {
+    let onOff = true;
+    if (this.state.value.length > 2) onOff = false;
     return (
       <div>
         {' '}
         <form onSubmit={this.props.addCommentHandler}>
           <label>
-            <textarea value={this.state.value} onChange={this.changeHandler}></textarea>
-            <button>Add Comment!</button>
+            <textarea value={this.state.value} onChange={this.changeHandler} placeholder="Enter your comment here!"></textarea>
+            <button disabled={onOff}>Add Comment!</button>
           </label>
         </form>
       </div>

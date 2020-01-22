@@ -34,8 +34,16 @@ exports.postNewComment = (article_id, username, body) => {
 
 exports.patchCommentVotes = (id, newVote, type) => {
   return axios.patch(`${base_url}/${type}/${id}`, { inc_votes: newVote }).then(({ data }) => {
-    console.log('patching......');
-
     return data;
   });
+};
+
+exports.deleteComment = id => {
+  return axios.delete(`${base_url}/comments/${id}`).then(({ data }) => {
+    return data;
+  });
+};
+
+exports.parseDate = date_string => {
+  return new Date(Date.parse(date_string));
 };

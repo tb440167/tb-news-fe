@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import { Router } from '@reach/router';
 import ArticlesList from './components/ArticlesList';
 import Article from './components/Article';
+import ErrHandler from './components/ErrHandler';
 
 class App extends Component {
   state = {
@@ -14,12 +15,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header username={this.state.username} />
+        <Header username={this.state.username} class="header" />
         <NavBar />
-        <Router>
+        <Router className="articles">
           <ArticlesList path="/" />
           <ArticlesList path="/topics/:topic" username={this.state.username} />
           <Article path="/articles/:article_id" username={this.state.username} />
+          <ErrHandler default />
         </Router>
       </div>
     );

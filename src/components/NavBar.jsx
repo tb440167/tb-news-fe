@@ -15,7 +15,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar">
+      <nav className="Nav">
         {this.state.topics.map(topic => {
           return (
             <Link to={`/topics/${topic.slug}`} key={topic.slug}>

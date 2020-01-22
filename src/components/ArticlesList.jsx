@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import ArticleTile from './ArticleTile';
-import Loading from './Loading';
+import '../App.css';
+import Loader from './Loader';
+import ErrHandler from './ErrHandler';
 
 class ArticlesList extends Component {
-  state = { articles: [], isLoading: true, sort_by: null, asc: null };
+  state = { articles: [], isLoading: true, err: '', sort_by: null, asc: null };
 
   componentDidMount() {
-    api.getArticles(this.props.topic).then(articles => {
-      this.setState({ articles: articles, isLoading: false, asc: false });
-    });
+    api
+      .getArticles(this.props.topic)
+      .then(articles => {
+        this.setState({ articles: articles, isLoading: false, asc: false });
+      })
+      .catch(({ response: { data } }) => {
+        console.log(data);
+
+        this.setState({ err: data.message, isLoading: false });
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.topic !== this.props.topic)
       api.getArticles(this.props.topic).then(articles => {
-        this.setState({ articles: articles, isLoading: false });
+        this.setState({ articles: articles, isLoading: false, err: '' });
       });
   }
 
   handleClick = event => {
     const order = this.state.asc ? 'asc' : 'desc';
-    console.log(order);
 
     event.preventDefault();
     this.setState({ sort_by: event.target.value, asc: !this.state.asc }, () => {
@@ -32,11 +40,11 @@ class ArticlesList extends Component {
   };
 
   render() {
-    const { isLoading, asc } = this.state;
+    const { isLoading, asc, err } = this.state;
+    if (isLoading) return <Loader />;
+    if (err) return <ErrHandler err={err} />;
     return (
-      <div>
-        {isLoading ? <Loading /> : null}
-        ~~~~~ARTICLES LIST~~~~~
+      <section>
         <form>
           <label>
             <button value="created_at" onClick={this.handleClick}>
@@ -59,7 +67,7 @@ class ArticlesList extends Component {
         {this.state.articles.map(article => {
           return <ArticleTile article={article} key={article.article_id} />;
         })}
-      </div>
+      </section>
     );
   }
 }

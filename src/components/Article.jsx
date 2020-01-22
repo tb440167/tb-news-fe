@@ -3,7 +3,7 @@ import * as api from '../utils/api';
 import CommentsList from './CommentsList';
 
 class Article extends Component {
-  state = { article: '', showComments: false, comment_body: '' };
+  state = { article: '', comment_body: '' };
 
   componentDidMount() {
     api.getSingleArticle(this.props.article_id).then(article => {
@@ -26,16 +26,17 @@ class Article extends Component {
   };
 
   render() {
-    const { article } = this.state;
-    const { showComments } = this.state;
+    const { title, body, author, created_at } = this.state.article;
+    const postedAt = created_at;
+
     return (
       <div>
-        {article.title}
-        <p>{article.body}</p>
-        <p>Author: {article.author}</p>
-        <p>Posted at: {article.created_at}</p>
+        {title}
+        <p>{body}</p>
+        <p>Author: {author}</p>
+        <p>Posted at: {postedAt}</p>
 
-        <CommentsList article_id={this.props.article_id} username={this.props.username} showComments={showComments} />
+        <CommentsList article_id={this.props.article_id} username={this.props.username} />
       </div>
     );
   }

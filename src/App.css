@@ -1,43 +1,98 @@
+body {
+}
+
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 18fr 1fr;
+  grid-template-rows: repeat(7vh, 6vh) auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header {
+  display: grid;
+  grid-template-columns: auto 15%;
+  padding: 0;
+  margin: 0;
+  border: solid;
+  grid-area: 1 / 1 / 2 / 4;
+  min-height: 2vh;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.UserLogin {
+  font-size: 10px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.navbar {
+.Nav {
   display: flex;
   flex-direction: row;
+  padding: 0;
+  margin: 0;
+  border: dotted;
+  grid-area: 2 / 2 / 3 / 3;
+  min-height: 5vh;
+  text-align: justify;
+}
+
+.articles {
+  padding: 0;
+  margin: 0;
+  border: dashed;
+  grid-area: 3 / 2 / 4 / 3;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.article-grid-container {
+  display: grid;
+  grid-template-columns: 0.2fr 1.8fr 0.2fr;
+  grid-template-rows: 0.3fr 2.4fr 0.3fr;
+  grid-template-areas:
+    'voter title topic'
+    'voter body body'
+    'voter author time';
+}
+
+/* .article-title {
+  display: grid;
+  grid-template-columns: 1.7fr 0.3fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'titleHeader topic';
+  grid-area: article-title;
+}
+
+.article-topicName {
+  grid-area: article-topicName;
+}
+
+.article-voter {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: '.' 'upVote' 'voteCount' 'downVote' '.';
+  grid-area: article-voter;
+} */
+
+.title {
+  grid-area: title;
+}
+
+.topic {
+  grid-area: topic;
+}
+
+.voter {
+  grid-area: voter;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.article-body {
+  grid-area: body;
+}
+
+.author {
+  grid-area: author;
+}
+
+.time {
+  grid-area: time;
 }

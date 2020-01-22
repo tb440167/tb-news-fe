@@ -1,14 +1,16 @@
 import React from 'react';
+import '../App.css';
 import { Link } from '@reach/router';
 
 const Header = props => {
   return (
-    <div>
-      <Link to="/">
-        <h1>Title Text Here</h1>
-      </Link>
-      <h5>logged in as: {props.username}</h5>
-    </div>
+    <header className="Header">
+      <p>
+        <Link to="/">skg iogysoigy fsg;ulsyg soi;ygs dguls </Link>
+      </p>
+
+      <p className="UserLogin">User: {props.username}</p>
+    </header>
   );
 };
 
