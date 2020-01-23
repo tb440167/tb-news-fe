@@ -1,15 +1,18 @@
 import React from 'react';
 import '../App.css';
 import { Link } from '@reach/router';
+import UserChooser from './UserChooser';
 
 const Header = props => {
   return (
     <header className="Header">
-      <p>
-        <Link to="/">skg iogysoigy fsg;ulsyg soi;ygs dguls </Link>
-      </p>
+      <Link to="/" className="header-title">
+        NorthCoders News
+      </Link>
 
-      <p className="UserLogin">User: {props.username}</p>
+      <div className="userLogin">
+        <UserChooser handleUserChoice={props.handleUserChoice} />
+      </div>
     </header>
   );
 };

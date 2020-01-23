@@ -1,0 +1,22 @@
+.singleComment {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding-bottom: 2.5pc;
+}
+
+.commentVoter {
+  grid-area: 1 / 1 / 4 / 2;
+  padding-right: 3px;
+}
+.commentBody {
+  grid-area: 1 / 2 / 3 / 6;
+}
+.commentAuthor {
+  grid-area: 3 / 2 / 4 / 5;
+}
+.commentDelete {
+  grid-area: 3 / 5 / 4 / 6;
+}

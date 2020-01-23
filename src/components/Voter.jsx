@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
-
+import { Button } from 'react-bootstrap';
+import down_sort from '../img/down_sort.png';
+import up_sort from '../img/up_sort.png';
 
 class Voter extends Component {
   state = { optiVote: 0, err: '' };
@@ -20,17 +22,15 @@ class Voter extends Component {
     if (err) return 'Voting not available';
     return (
       <div>
-        <div className="article-upVote">
-          <button onClick={() => this.handleClick(1)} disabled={this.state.optiVote > 0}>
-            upVote
-          </button>
-        </div>
-        <div className="article-voteCount">Votes: {this.state.optiVote + this.props.votes}</div>
-        <div className="article-downVote">
-          <button onClick={() => this.handleClick(-1)} disabled={this.state.optiVote < 0}>
-            downVote
-          </button>
-        </div>
+        <Button variant="success" size="sm" onClick={() => this.handleClick(1)} disabled={this.state.optiVote > 0}>
+          <img src={up_sort} alt="UP VOTE"></img>
+        </Button>
+
+        <div>{this.state.optiVote + this.props.votes}</div>
+        <Button variant="danger" size="sm" onClick={() => this.handleClick(-1)} disabled={this.state.optiVote < 0}>
+          <img src={down_sort} alt="DOWN VOTE"></img>
+        </Button>
+        <div className="article-downVote"></div>
       </div>
     );
   }

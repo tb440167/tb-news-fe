@@ -16,13 +16,18 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="Nav">
-        {this.state.topics.map(topic => {
+        <div></div>
+        {this.state.topics.map((topic, index) => {
           return (
-            <Link to={`/topics/${topic.slug}`} key={topic.slug}>
-              <h4> {topic.slug}-----</h4>
-            </Link>
+            <div className="button" id="button-4" key={index}>
+              <div id="underline"></div>
+              <Link to={`/topics/${topic.slug}`} key={topic.slug} style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold' }}>
+                {topic.slug}
+              </Link>
+            </div>
           );
         })}
+        <div></div>
       </nav>
     );
   }

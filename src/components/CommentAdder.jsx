@@ -9,8 +9,8 @@ class CommentAdder extends Component {
     this.setState({ value: event.target.value });
   };
 
-  componentDidUpdate(prevProps, prevState){
-        if(prevProps.checker !== this.props.checker) this.setState({value: ""})
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.checker !== this.props.checker) this.setState({ value: '' });
   }
 
   render() {
@@ -18,7 +18,6 @@ class CommentAdder extends Component {
     if (this.state.value.length > 2) onOff = false;
     return (
       <div>
-        {' '}
         <form onSubmit={this.props.addCommentHandler}>
           <label>
             <textarea value={this.state.value} onChange={this.changeHandler} placeholder="Enter your comment here!"></textarea>

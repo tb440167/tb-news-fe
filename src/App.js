@@ -12,11 +12,16 @@ class App extends Component {
     username: 'jessjelly'
   };
 
+  handleUserChoice = user => {
+    this.setState({ username: user });
+  };
+
   render() {
     return (
       <div className="App">
-        <Header username={this.state.username} class="header" />
+        <Header username={this.state.username} class="header" handleUserChoice={this.handleUserChoice} />
         <NavBar />
+
         <Router className="articles">
           <ArticlesList path="/" />
           <ArticlesList path="/topics/:topic" username={this.state.username} />

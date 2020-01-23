@@ -27,15 +27,13 @@ class Article extends Component {
 
   render() {
     const { title, body, author, created_at } = this.state.article;
-    const postedAt = created_at;
 
     return (
       <div>
-        {title}
+        <h1>{title}</h1>
         <p>{body}</p>
         <p>Author: {author}</p>
-        <p>Posted at: {postedAt}</p>
-
+        Posted: {created_at}
         <CommentsList article_id={this.props.article_id} username={this.props.username} />
       </div>
     );
