@@ -35,14 +35,3 @@ class CommentAdder extends Component {
 }
 
 export default CommentAdder;
-
-{
-  /* <div>
-<form onSubmit={this.props.addCommentHandler}>
-  <label>
-    <textarea value={this.state.value} onChange={this.changeHandler} placeholder="Enter your comment here!"></textarea>
-    <button disabled={onOff}>Add Comment!</button>
-  </label>
-</form>
-</div> */
-}

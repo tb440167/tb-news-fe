@@ -27,7 +27,7 @@ class Article extends Component {
   };
 
   render() {
-    const { title, body, author, created_at } = this.state.article;
+    const { title, body, author } = this.state.article;
 
     return (
       <Card className="text-center">
