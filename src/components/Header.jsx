@@ -5,12 +5,13 @@ import UserChooser from './UserChooser';
 
 const Header = props => {
   return (
-    <header className="Header">
-      <Link to="/" className="header-title">
+    <header>
+      <div>
+      <Link to="/" >
         NorthCoders News
       </Link>
-
-      <div className="userLogin">
+      </div>
+      <div>
         <UserChooser handleUserChoice={props.handleUserChoice} />
       </div>
     </header>

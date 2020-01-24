@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import CommentsList from './CommentsList';
+import {Card} from "react-bootstrap"
 
 class Article extends Component {
   state = { article: '', comment_body: '' };
@@ -29,15 +30,23 @@ class Article extends Component {
     const { title, body, author, created_at } = this.state.article;
 
     return (
-      <div>
-        <h1>{title}</h1>
-        <p>{body}</p>
-        <p>Author: {author}</p>
-        Posted: {created_at}
-        <CommentsList article_id={this.props.article_id} username={this.props.username} />
-      </div>
+<Card className="text-center">
+  <Card.Header><Card.Title>{title}</Card.Title></Card.Header>
+  <Card.Body>
+    <Card.Text>
+    <blockquote className="blockquote mb-0">
+  {body}
+  </blockquote>
+    </Card.Text>
+
+  </Card.Body>
+  <Card.Footer className="text-muted">written by: {author}</Card.Footer><br/><br/>
+  <CommentsList article_id={this.props.article_id} username={this.props.username} />
+  
+</Card>
     );
   }
 }
 
 export default Article;
+

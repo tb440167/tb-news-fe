@@ -4,6 +4,7 @@ import CommentTile from './CommentTile';
 import CommentAdder from './CommentAdder';
 import Loader from './Loader';
 import ErrHandler from './ErrHandler';
+import {Card} from "react-bootstrap"
 
 class CommentsList extends Component {
   state = { comments: [], err: '', isLoading: true };
@@ -44,10 +45,13 @@ class CommentsList extends Component {
     if (err) return <ErrHandler err={err} />;
     return (
       <div>
-        <CommentAdder addCommentHandler={this.addCommentHandler} checker={checker}/>
+                <CommentAdder addCommentHandler={this.addCommentHandler} checker={checker}/>
+      <div>
+      <Card.Header>All Comments</Card.Header>
         {comments.map(comment => {
           return <CommentTile comment={comment} key={comment.comment_id} username={this.props.username} handleDeleteClick={this.handleDeleteClick} />;
         })}
+      </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
-import { Button } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
 import down_sort from '../img/down_sort.png';
 import up_sort from '../img/up_sort.png';
 
@@ -21,17 +21,17 @@ class Voter extends Component {
     const { err } = this.state;
     if (err) return 'Voting not available';
     return (
-      <div>
+      <span className="voter">
         <Button variant="success" size="sm" onClick={() => this.handleClick(1)} disabled={this.state.optiVote > 0}>
           <img src={up_sort} alt="UP VOTE"></img>
         </Button>
 
-        <div>{this.state.optiVote + this.props.votes}</div>
+        <span>{this.state.optiVote + this.props.votes}</span>
         <Button variant="danger" size="sm" onClick={() => this.handleClick(-1)} disabled={this.state.optiVote < 0}>
           <img src={down_sort} alt="DOWN VOTE"></img>
         </Button>
-        <div className="article-downVote"></div>
-      </div>
+        <span className="article-downVote"></span>
+      </span>
     );
   }
 }

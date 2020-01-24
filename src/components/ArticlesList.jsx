@@ -44,8 +44,9 @@ class ArticlesList extends Component {
       <section>
         <Sorter handleClick={this.handleClick} />
         {this.state.articles.map(article => {
-          return <ArticleTile article={article} key={article.article_id} />;
+          return <ArticleTile article={article} key={article.article_id} />
         })}
+        
       </section>
     );
   }

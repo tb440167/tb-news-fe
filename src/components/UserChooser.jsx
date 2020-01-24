@@ -8,8 +8,8 @@ const UserChooser = props => {
     props.handleUserChoice(user);
   }
   return (
-    <div>
-      <div className="userLogin">
+    
+      <div className="app-userLogin">
         <form onChange={handleChange}>
           <select>
             {users.map(user => {
@@ -22,7 +22,7 @@ const UserChooser = props => {
           </select>
         </form>
       </div>
-    </div>
+   
   );
 };
 
