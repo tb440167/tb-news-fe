@@ -1,7 +1,7 @@
 .App {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 20vh auto auto;
+  grid-template-rows: 12vh auto auto;
   grid-template-areas:
     'navbar'
     'filter'
@@ -19,6 +19,8 @@ body {
   grid-template-areas: 'main-header user-login';
   display: flex;
   flex-direction: row;
+  max-height: fit-content;
+  z-index: -1;
 }
 
 .main-header {
@@ -40,6 +42,27 @@ body {
   font-size: 2vh;
 }
 
+.mainList-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr 0.25fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'leftSidebar bodyContent bodyContent rightSideBar';
+}
+
+.mainList-leftSidebar {
+  grid-area: mainList-leftSidebar;
+}
+
+.mainList-rightSideBar {
+  grid-area: mainList-rightSideBar;
+}
+
+.mainList-bodyContent {
+  grid-area: mainList-bodyContent;
+  max-width: 85%;
+  justify-self: center;
+}
+
 .articleTile-grid-container {
   display: grid;
   display: flex;
@@ -52,6 +75,9 @@ body {
 .articleTile-voter {
   grid-area: articleTile-voter;
   padding-right: 15px;
+}
+.articleTileHeader {
+  font-size: 4vh;
 }
 
 .articleTile-body {
@@ -101,4 +127,10 @@ body {
   font-weight: bolder;
   font-size: 3vh;
   text-align: center;
+}
+
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

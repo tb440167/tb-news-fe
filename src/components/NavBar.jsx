@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
-import { Navbar, Nav, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, DropdownButton, Dropdown, Button, ButtonGroup } from 'react-bootstrap';
 
 class NavBar extends Component {
   state = {
@@ -13,7 +13,7 @@ class NavBar extends Component {
     });
   }
 
-  handleChange = (event, eventkey) => {
+  handleChange = event => {
     event.preventDefault();
     const user = event.nativeEvent.target.text;
     this.props.handleUserChoice(user);
@@ -24,29 +24,33 @@ class NavBar extends Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="/">{'< '}NC News /></Navbar.Brand>
-        {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
-        {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
-        <Nav className="mr-auto">
-          {this.state.topics.map((topic, index) => {
-            return (
-              <Nav.Link href={`/topics/${topic.slug}`} key={topic.slug}>
-                {topic.slug}
-              </Nav.Link>
-            );
-          })}
-        </Nav>
-        {/* </Navbar.Collapse> */}
-        <Nav>
-          <DropdownButton drop="left" variant="secondary" title={this.props.username} size="sm">
-            {users.map(user => {
-              return (
-                <Dropdown.Item eventkey={user} onClick={this.handleChange} key={user}>
-                  {user}
-                </Dropdown.Item>
-              );
-            })}
-          </DropdownButton>
-        </Nav>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <ButtonGroup aria-label="Basic example">
+              {this.state.topics.map(topic => {
+                return (
+                  <Button variant="dark" href={`/topics/${topic.slug}`} key={topic.slug}>
+                    {topic.slug}
+                  </Button>
+                );
+              })}
+            </ButtonGroup>
+          </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav>
+            <DropdownButton drop="left" variant="secondary" title={this.props.username} size="sm">
+              {users.map(user => {
+                return (
+                  <Dropdown.Item eventkey={user} onClick={this.handleChange} key={user}>
+                    {user}
+                  </Dropdown.Item>
+                );
+              })}
+            </DropdownButton>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }

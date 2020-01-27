@@ -41,13 +41,16 @@ class ArticlesList extends Component {
     if (isLoading) return <Loader />;
     if (err) return <ErrHandler err={err} />;
     return (
-      <section>
-        <Sorter handleClick={this.handleClick} />
-        {this.state.articles.map(article => {
-          return <ArticleTile article={article} key={article.article_id} />
-        })}
-        
-      </section>
+      <div className="mainList-grid-container">
+        <section className="mainList-bodyContent">
+          <Sorter handleClick={this.handleClick} />
+          <div className="mainList-bodyContent">
+            {this.state.articles.map(article => {
+              return <ArticleTile article={article} key={article.article_id} />;
+            })}
+          </div>
+        </section>
+      </div>
     );
   }
 }

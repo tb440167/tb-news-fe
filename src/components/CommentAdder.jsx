@@ -19,6 +19,7 @@ class CommentAdder extends Component {
     let buttonType = 'danger';
     if (this.state.value.length > 4) onOff = false;
     if (!onOff) buttonType = 'primary';
+    if (this.props.err) return 'Oops, comment was not submitted';
     return (
       <Form onSubmit={this.props.addCommentHandler}>
         <Form.Group controlId="exampleForm.ControlTextarea1">

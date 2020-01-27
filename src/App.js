@@ -8,18 +8,18 @@ import ErrHandler from './components/ErrHandler';
 
 class App extends Component {
   state = {
-    username: 'jessjelly'
+    username: localStorage.getItem('username') || 'jessjelly'
   };
 
   handleUserChoice = user => {
     this.setState({ username: user });
+    localStorage.setItem('username', user);
   };
 
   render() {
     return (
       <main className="App">
-    
-        <NavBar username={this.state.username} handleUserChoice={this.handleUserChoice}/>
+        <NavBar username={this.state.username} handleUserChoice={this.handleUserChoice} />
 
         <Router>
           <ArticlesList path="/" />
@@ -27,7 +27,6 @@ class App extends Component {
           <Article path="/articles/:article_id" username={this.state.username} />
           <ErrHandler default />
         </Router>
-
       </main>
     );
   }

@@ -4,10 +4,10 @@ import CommentTile from './CommentTile';
 import CommentAdder from './CommentAdder';
 import Loader from './Loader';
 import ErrHandler from './ErrHandler';
-import {Card} from "react-bootstrap"
+import { Card } from 'react-bootstrap';
 
 class CommentsList extends Component {
-  state = { comments: [], err: '', isLoading: true };
+  state = { comments: [], err: '', isLoading: true, addCommentError: '' };
 
   componentDidMount() {
     api
@@ -23,11 +23,16 @@ class CommentsList extends Component {
   addCommentHandler = event => {
     event.preventDefault();
     const body = event.target.elements[0].value;
-    api.postNewComment(this.props.article_id, this.props.username, body).then(comment => {
-      this.setState(currentState => {
-        return { comments: [comment, ...currentState.comments] };
+    api
+      .postNewComment(this.props.article_id, this.props.username, body)
+      .then(comment => {
+        this.setState(currentState => {
+          return { comments: [comment, ...currentState.comments] };
+        });
+      })
+      .catch(err => {
+        this.setState({ addCommentError: err });
       });
-    });
   };
 
   handleDeleteClick = id => {
@@ -40,18 +45,22 @@ class CommentsList extends Component {
 
   render() {
     const { comments, err } = this.state;
-    const checker = this.state.comments.length
+    const checker = this.state.comments.length;
     if (this.state.isLoading) return <Loader />;
     if (err) return <ErrHandler err={err} />;
     return (
       <div>
-                <CommentAdder addCommentHandler={this.addCommentHandler} checker={checker}/>
-      <div>
-      <Card.Header>All Comments</Card.Header>
-        {comments.map(comment => {
-          return <CommentTile comment={comment} key={comment.comment_id} username={this.props.username} handleDeleteClick={this.handleDeleteClick} />;
-        })}
-      </div>
+        <CommentAdder addCommentHandler={this.addCommentHandler} checker={checker} err={this.state.addCommentError} />
+        <div>
+          <Card.Header>
+            <h2>All Comments</h2>
+          </Card.Header>
+          {comments.map(comment => {
+            return (
+              <CommentTile comment={comment} key={comment.comment_id} username={this.props.username} handleDeleteClick={this.handleDeleteClick} />
+            );
+          })}
+        </div>
       </div>
     );
   }
