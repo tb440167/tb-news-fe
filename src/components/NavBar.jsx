@@ -23,7 +23,7 @@ class NavBar extends Component {
     const users = ['jessjelly', 'tickle122', 'happyamy2016', 'cooljmessy', 'weegembump', 'grumpy19'];
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-        <Navbar.Brand href="/">{'< '}NC News /></Navbar.Brand>
+        {/* <Navbar.Brand href="/">{'< '}NC News /></Navbar.Brand> */}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -31,16 +31,12 @@ class NavBar extends Component {
               {this.state.topics.map(topic => {
                 return (
                   <Button variant="dark" href={`/topics/${topic.slug}`} key={topic.slug}>
-                    {topic.slug}
+                    {topic.slug.toUpperCase()}
                   </Button>
                 );
               })}
             </ButtonGroup>
-          </Nav>
-        </Navbar.Collapse>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav>
-            <DropdownButton drop="left" variant="secondary" title={this.props.username} size="sm">
+            <DropdownButton drop="down" variant="secondary" title={this.props.username} size="sm">
               {users.map(user => {
                 return (
                   <Dropdown.Item eventkey={user} onClick={this.handleChange} key={user}>
